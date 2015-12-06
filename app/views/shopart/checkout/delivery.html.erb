@@ -1,0 +1,19 @@
+<%= render "checkout_menu" %>
+<%= form_for @form, method: :put, url: wizard_path do |f| %>
+<div class="row">
+  <div class="col-md-8">
+  <% Delivery.all.each do |d| %>
+  <div class="col-md-10">
+    <%= f.radio_button :delivery_id, d.id.to_i  %>
+    <%= f.label :delivery_id, "#{d.description} + #{number_to_currency(d.price)}" %>
+  </div>
+  <% end %>
+  </div>
+    <%= render "summary_order" %>
+</div>
+<div class="row">
+  <div class="col-md-2">
+    <%= f.submit "SAVE AND CONTINUE", class: "btn btn-primary" %>
+  </div>
+</div>
+<% end %>

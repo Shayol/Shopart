@@ -55,7 +55,7 @@ module Shopart
   end
 
   def update_user_address
-    user.update_settings unless user.guest?
+    customer.update_settings unless customer.guest?
   end
 
   def add_item(product, quantity=1)
@@ -90,7 +90,7 @@ module Shopart
   end
 
   def current_order?
-    self == user.current_order
+    self == customer.current_order
   end
 
   end

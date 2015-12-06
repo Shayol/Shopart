@@ -5,7 +5,7 @@ class CreateShopartOrderItems < ActiveRecord::Migration
       t.integer :quantity, null: false
       t.string :product_type
       t.integer :product_id
-      t.references :order, index: true, foreign_key: true
+      t.belongs_to :order
       t.timestamps null: false
     end
   end

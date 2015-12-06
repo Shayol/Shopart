@@ -1,0 +1,72 @@
+<div class="row">
+  <div class="col-md-3">
+    <h4>Shipping Address <small><%= link_to "(edit)", wizard_path(:address) if step == wizard_steps[-2] %></small></h4>
+    <div class="col-md-10">
+      <%= order.shipping_address.firstname %>
+      <%= order.shipping_address.lastname %>
+    <p>
+      <%= order.shipping_address.address %>
+    </p>
+    <p>
+      <%= order.shipping_address.city %>
+      <%= order.shipping_address.zipcode %>
+    </p>
+    <p>
+      <%= order.shipping_address.country %>
+    </p>
+    <p>
+      Phone
+      <%= order.shipping_address.phone %>
+    </p>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <h4>Billing Address <small><%= link_to "(edit)", wizard_path(:address) if step == wizard_steps[-2] %></small></h4>
+    <div class="col-md-10">
+      <%= order.billing_address.firstname %>
+      <%= order.billing_address.lastname %>
+    <p>
+      <%= order.billing_address.address %>
+    </p>
+    <p>
+      <%= order.billing_address.city %>
+      <%= order.billing_address.zipcode %>
+    </p>
+    <p>
+      <%= order.billing_address.country %>
+    </p>
+    <p>
+      Phone
+      <%= order.billing_address.phone %>
+    </p>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <h4>Shipment<small><%= link_to "(edit)", wizard_path(:delivery) if step == wizard_steps[-2]%></small></h4>
+    <div class="col-md-10">
+      <%= order.delivery.description %>
+      <p><%= order.delivery.price %></p>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <h4>Payment Information<small><%= link_to "(edit)", wizard_path(:payment) if step == wizard_steps[-2] %></small></h4>
+    <div class="col-md-10">
+      ** ** **<%= order.credit_card.number[-4..-1] %>
+      <p><%= order.credit_card.expiration_month %>/<%= order.credit_card.expiration_year %></p>
+    </div>
+  </div>
+</div>
+<%= render "orders/order_item", order: order %>
+<hr>
+<div class="row">
+  <div class="col-md-12 text-right">
+    SUBTOTAL: <strong><%= number_to_currency(order.items_price) %></strong>
+    <p>SHIPPING: <strong><%= number_to_currency(order.delivery.price) %></strong></p>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12 text-right">
+    ORDER TOTAL: <strong><%= number_to_currency(order.total_price) %></strong>
+  </div>
+</div>

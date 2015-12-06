@@ -7,7 +7,7 @@ class CreateShopartOrders < ActiveRecord::Migration
       t.belongs_to :customer, polymorphic: true
       t.integer :billing_address_id
       t.integer :shipping_address_id
-      t.references :delivery, index: true, foreign_key: true
+      t.belongs_to :delivery
 
       t.timestamps null: false
     end

@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = Shopart::VERSION
   s.authors     = ["Shayol"]
   s.email       = ["thesadstorm@yandex.ua"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Shopping cart == Shopart."
-  s.description = "TODO: Engine for cart and checkout."
+  s.homepage    = "http://shopart"
+  s.summary     = "Shopping cart == Shopart."
+  s.description = "Engine for cart and checkout."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency "aasm"
   s.add_dependency "wicked"
   s.add_dependency "country_select"
+  s.add_dependency "virtus"
 
   s.add_development_dependency "pg"
   s.add_development_dependency "rspec-rails"

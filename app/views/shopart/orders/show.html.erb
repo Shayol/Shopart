@@ -1,0 +1,33 @@
+<% if @order.order_items.any? %>
+
+<%= form_for @order, method: :put do |f| %>
+  <%= render "order_item", order: @order %>
+
+<hr>
+
+<div class="row">
+  <div class="col-md-3 col-md-offset-9 text-right">
+    SUBTOTAL: <strong>$<%= @order.total_price %></strong>
+  </div>
+</div>
+<% if @order == current_or_guest_user.current_order %>
+<div class="row">
+  <div class="col-md-2 ">
+    <%= button_to "EMPTY CART", empty_cart_order_path, class: "btn btn-danger"  %>
+  </div>
+  <div class="col-md-2 ">
+    <%= button_to "CONTINUE SHOPPING", books_path, class: "btn btn-primary" %>
+  </div>
+  <div class="col-md-2 col-md-offset-4">
+    <%= f.submit "Update", class: "btn btn-default" %>
+  </div>
+  <div class="col-md-2 ">
+    <%= button_to "CHECKOUT", "/orders/#{current_or_guest_user.current_order.id}/checkout/address", method: :get, class: "btn btn-success" %>
+  </div>
+</div>
+<% end %>
+<% end %>
+<% else %>
+  <p> No items in your order yet. <%= link_to "Go back to shop", books_path %></p>
+<% end %>
+

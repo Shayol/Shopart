@@ -1,0 +1,113 @@
+<%= render "checkout_menu" %>
+<div class="row">
+  <div class="col-md-4">
+    <div class="row">
+      <div class="col-md-8">
+        <strong> BILLING ADDRESS </strong>
+      </div>
+    </div>
+    <%= form_for @form, method: :put, url: wizard_path do |f| %>
+      <% if @form.errors.any? %>
+        <% @form.errors.full_messages.each do |msg| %>
+          <p class="alert"> <%= msg %> </p>
+        <% end %>
+      <% end %>
+    <div class="row">
+      <div class="col-md-8">
+        <%= f.text_field :billing_firstname, placeholder: "First name", class: "form-control" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <%= f.text_field :billing_lastname, placeholder: "Last name", class: "form-control" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <%= f.text_field :billing_address, placeholder: "Street address", class: "form-control" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <%= f.text_field :billing_city, placeholder: "City", class: "form-control" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <%= f.country_select :billing_country, {priority_countries: ["GB", "US"], prompt: "Select a Country"}, class: "form-control" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <%= f.text_field :billing_zipcode, placeholder: "Zip", class: "form-control" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <%= f.text_field :billing_phone, placeholder: "Phone", class: "form-control" %>
+      </div>
+    </div>
+  </div>
+
+<div class="col-md-4">
+  <div class="row">
+    <div class="col-md-8">
+      <strong>SHIPPING ADDRESS</strong>
+    </div>
+  </div>
+    <div class="row">
+      <div class="col-md-8">
+       <%= f.check_box :use_billing_as_shipping %>
+       <%= label_tag 'use_billing_as_shipping', 'Use billing as shipping' %>
+      </div>
+    </div>
+    <div class="shipping_address_checkout">
+    <div class="row">
+      <div class="col-md-8">
+        <%= f.text_field :shipping_firstname, placeholder: "First name", class: "form-control" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <%= f.text_field :shipping_lastname, placeholder: "Last name", class: "form-control" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <%= f.text_field :shipping_address, placeholder: "Street address", class: "form-control" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <%= f.text_field :shipping_city, placeholder: "City", class: "form-control" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <%= f.country_select :shipping_country, {priority_countries: ["GB", "US"], prompt: "Select a Country"}, class: "form-control" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <%= f.text_field :shipping_zipcode, placeholder: "Zip", class: "form-control" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <%= f.text_field :shipping_phone, placeholder: "Phone", class: "form-control" %>
+      </div>
+    </div>
+    </div>
+</div>
+
+<%= render "summary_order" %>
+</div>
+
+<div class="row">
+  <div class="col-md-2">
+    <%= f.submit "SAVE AND CONTINUE", class: "btn btn-primary" %>
+  </div>
+</div>
+<% end %>
+
+

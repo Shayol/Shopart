@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-md-8 text-center">
+    BOOK
+  </div>
+  <div class="col-md-1 text-center">
+    PRICE
+  </div>
+  <div class="col-md-1 text-center">
+    QTY
+  </div>
+  <div class="col-md-1 text-center">
+    TOTAL
+  </div>
+</div>
+<% order.order_items.each do |order_item| %>
+<div class="row">
+  <div class="col-md-3">
+    <img src=<%= order_item.product.image.thumb %> ></img>
+  </div>
+  <div class="col-md-5">
+    <div class="col-md-11"><strong><%= order_item.product.title.titleize %></strong></div>
+    <div class="col-md-11"><%= order_item.product.summary %></div>
+  </div>
+  <div class="col-md-1 text-center">
+    <strong>$<%= order_item.price %></strong>
+  </div>
+  <div class="col-md-1 text-center">
+  <% if order.current_order? %>
+    <%= number_field_tag "id-#{order_item.id}", order_item.quantity, class: "form-control qty", within: 1..200 %>
+  <% else %>
+    <strong><%= order_item.quantity %></strong>
+  <% end %>
+  </div>
+  <div class="col-md-1 text-center">
+    <strong><%= number_to_currency(order_item.price * order_item.quantity) %></strong>
+  </div>
+  <div class="col-md-1 text-left">
+    <% if order.current_order? %>
+      <%= link_to order_item_path(order_item), id: "delete_item_#{order_item.id}", method: :delete do %>
+      <i class="fa fa-times"></i>
+    <% end %>
+    <% end %>
+  </div>
+</div>
+<% end %>

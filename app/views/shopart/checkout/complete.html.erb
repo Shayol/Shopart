@@ -1,0 +1,7 @@
+<h2>Order <%= @order_in_queue.id %></h2>
+<%= render "order_info", order: @order_in_queue %>
+<div class="row">
+  <div class="col-md-2">
+    <%= button_to "GO BACK TO STORE", books_path, class: "btn btn-primary" %>
+  </div>
+</div>
