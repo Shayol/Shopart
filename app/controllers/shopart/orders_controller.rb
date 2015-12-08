@@ -30,7 +30,7 @@ module Shopart
         item.update(quantity: params["id-#{item.id}"])
       end
       @cart.set_total_price
-      redirect_to cart_path
+      redirect_to root_path
     end
 
     private

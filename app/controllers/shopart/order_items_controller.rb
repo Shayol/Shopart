@@ -9,7 +9,7 @@ module Shopart
       else
         flash[:alert] = "#{order_item_params[:product_type]} wasn't added"
       end
-      redirect_to cart_path
+      redirect_to shopart.root_path
     end
 
   def destroy

@@ -33,8 +33,8 @@
     <div class="row">
       <div class="col-md-4">
       <p>Expiration date</p>
-        <%= f.select :card_expiration_month, CreditCard::EXPIRATION_MONTH, include_blank: "Month", class: "form-control" %>
-        <%= f.select :card_expiration_year, CreditCard::EXPIRATION_YEAR, include_blank: "Year", class: "form-control" %>
+        <%= f.select :card_expiration_month, Shopart::CreditCard::EXPIRATION_MONTH, include_blank: "Month", class: "form-control" %>
+        <%= f.select :card_expiration_year, Shopart::CreditCard::EXPIRATION_YEAR, include_blank: "Year", class: "form-control" %>
       </div>
     </div>
     <div class="row">

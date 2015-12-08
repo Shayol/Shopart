@@ -1,6 +1,7 @@
 module Shopart
   class CreditCard < ActiveRecord::Base
-    belongs_to :customer, polymorhic: true
+    belongs_to :customer, polymorphic: true
+    belongs_to :order, class_name: 'Shopart::Order'
 
     EXPIRATION_MONTH = (1..12).map(&:to_s)
     EXPIRATION_YEAR = (Date.today.year..(Date.today.year + 10)).map(&:to_s)

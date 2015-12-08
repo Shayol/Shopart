@@ -1,6 +1,6 @@
 <% if @cart.order_items.any? %>
 
-<%= form_tag("/orders/#{@cart.id}", method: :put) do %>
+<%= form_tag("orders/#{@cart.id}", method: :put) do %>
   <%= render "order_item", order: @cart %>
 
 <hr>
@@ -16,7 +16,7 @@
     <% end %>
   </div>
   <div class="col-md-2 ">
-    <%= button_to "CONTINUE SHOPPING", books_path, class: "btn btn-primary" %>
+    <%= button_to "CONTINUE SHOPPING", main_app.root_path, class: "btn btn-primary" %>
   </div>
   <div class="col-md-2 col-md-offset-4">
     <%= button_to "EMPTY CART", @cart, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" }  %>
@@ -26,6 +26,6 @@
   </div>
 </div>
 <% else %>
-  <p> No items in your order yet. <%= link_to "Go back to shop", books_path %></p>
+  <p> No items in your order yet. <%= link_to "Go back to shop", main_app.root_path %></p>
 <% end %>
 

@@ -2,7 +2,7 @@
 <%= form_for @form, method: :put, url: wizard_path do |f| %>
 <div class="row">
   <div class="col-md-8">
-  <% Delivery.all.each do |d| %>
+  <% Shopart::Delivery.all.each do |d| %>
   <div class="col-md-10">
     <%= f.radio_button :delivery_id, d.id.to_i  %>
     <%= f.label :delivery_id, "#{d.description} + #{number_to_currency(d.price)}" %>

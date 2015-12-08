@@ -34,7 +34,7 @@ class CheckoutForm
   attribute :card_expiration_year, String
   attribute :card_CVV, String
   attribute :card_number, String
-  attribute :completed_date, Time
+  attribute :completed_date, DateTime
   attribute :delivery_id, Integer
 
 
@@ -113,16 +113,16 @@ class CheckoutForm
     end
   end
 
-  def order_billing_address
-    order.billing_address || order.user.billing_address || Address.new
+  def order_billing_address 
+    order.billing_address || order.customer.try(:billing_address) || Address.new
   end
 
   def order_shipping_address
-    order.shipping_address || order.user.shipping_address || Address.new
+    order.shipping_address || order.customer.try(:shipping_address) || Address.new
   end
 
   def order_credit_card
-    order.credit_card || CreditCard.new
+    order.credit_card || order.customer.try(:credit_card) || CreditCard.new
   end
 
   def order_delivery
@@ -159,7 +159,7 @@ class CheckoutForm
   end
 
   def create_confirm
-    order.update({completed_date: completed_date})  ### check this!!!
+    order.update({completed_date: completed_date})  
     order.confirm_event!
   end
 
@@ -175,8 +175,6 @@ class CheckoutForm
       when :confirm
         order.set_total_price
         create_confirm
-      when :complete
-
     end
   end
 

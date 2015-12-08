@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
 
-  mount Shopart::Engine => "/shopart"
+  root to: 'sticks#index'
+
+  resources :sticks
+  resources :stones
+
+  mount Shopart::Engine => "/shopart", as: "shopart"
 end

@@ -9,13 +9,13 @@ module Shopart
     before_action :step_info
 
     def show
-      @form = CheckoutForm.new({order: @order, step: step})
+      @form = Shopart::CheckoutForm.new({order: @order, step: step})
       @form.populate
       render_wizard
     end
 
     def update
-      @form = CheckoutForm.new(form_params.merge!({order: @order, step: step}))
+      @form = Shopart::CheckoutForm.new(form_params.merge!({order: @order, step: step}))
       render_wizard @form
     end
 

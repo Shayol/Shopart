@@ -1,15 +1,18 @@
 module Shopart
   class Order < ActiveRecord::Base
+    include AASM
+    
     ORDER_STATE = ["in_progress", "in_queue", "in_delivery", "delivered", "canceled"]
 
+  has_one    :credit_card, class_name: 'Shopart::CreditCard'
   has_many   :order_items, dependent: :destroy
   has_many   :products, :through => :order_items
   belongs_to :customer, polymorphic: true
-  belongs_to :delivery
+  belongs_to :delivery, class_name: 'Shopart::Delivery'
   belongs_to :billing_address, :class_name => 'Address', :foreign_key => 'billing_address_id'
   belongs_to :shipping_address, :class_name => 'Address', :foreign_key => 'shipping_address_id'
 
-  validates :state, inclusion: { in: ORDER_STATE }, presence: true
+  validates  :state, inclusion: { in: ORDER_STATE }, presence: true
 
 
   scope :in_progress,  -> {where(state: "in_progress")}
@@ -24,28 +27,12 @@ module Shopart
     state :delivered
     state :canceled
 
-
-    # event :address_event do
-    #   transitions :from => :in_progress, :to => :address
-    # end
-
-    # event :type_of_delivery_event, :after => :add_delivery_price do
-    #   transitions :from => :address, :to => :type_of_delivery
-    # end
-
-    # event :payment_event do
-    #   transitions :from => :type_of_delivery, :to => :payment
-    # end
-
     event :confirm_event, :after => [:update_user_address, :notify_user] do
       transitions :from => :in_progress, :to => :in_queue
     end
 
     # event :cancel do
     #   transitions :from => [:in_queue, :in_delivery], :to => :canceled
-    # end
-    # event :finish do
-    #   transitions :from => :in_delivery, :to => :delivered
     # end
 
   end
@@ -55,7 +42,7 @@ module Shopart
   end
 
   def update_user_address
-    customer.update_settings unless customer.guest?
+    #customer.update_settings unless customer.guest?
   end
 
   def add_item(product, quantity=1)

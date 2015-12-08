@@ -8,6 +8,7 @@ class CreateShopartCreditCards < ActiveRecord::Migration
       t.text :lastname
       t.text :CVV
       t.belongs_to :customer, polymorphic: true
+      t.belongs_to :order
       t.timestamps null: false
     end
   end

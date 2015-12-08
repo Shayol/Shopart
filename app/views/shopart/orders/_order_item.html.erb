@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-8 text-center">
-    BOOK
+    ITEM
   </div>
   <div class="col-md-1 text-center">
     PRICE
@@ -15,11 +15,11 @@
 <% order.order_items.each do |order_item| %>
 <div class="row">
   <div class="col-md-3">
-    <img src=<%= order_item.product.image.thumb %> ></img>
+    <img src=<%= order_item.product.try(:image).try(:thumb) %> ></img>
   </div>
   <div class="col-md-5">
-    <div class="col-md-11"><strong><%= order_item.product.title.titleize %></strong></div>
-    <div class="col-md-11"><%= order_item.product.summary %></div>
+    <div class="col-md-11"><strong><%= order_item.product.try(:title).try(:titleize) %></strong></div>
+    <div class="col-md-11"><%= order_item.product.try(:summary) %></div>
   </div>
   <div class="col-md-1 text-center">
     <strong>$<%= order_item.price %></strong>
