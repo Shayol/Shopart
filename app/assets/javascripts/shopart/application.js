@@ -11,3 +11,19 @@
 // about supported directives.
 //
 //= require_tree .
+
+var ready;
+ready = function() {
+
+  if($("#checkout_address_form_use_billing_as_shipping").is(":checked")) {
+    $(".shipping_address_checkout").addClass("hidden");
+  }
+
+  $('#checkout_address_form_use_billing_as_shipping').change(function() {
+  $(".shipping_address_checkout").toggleClass("hidden");
+  });
+
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);

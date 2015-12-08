@@ -13,15 +13,15 @@ module Shopart
     end
 
   def destroy
-    @order_item = OrderItem.find(params[:id])
-    authorize! :destroy, @order_item
+    @order_item = Shopart::OrderItem.find(params[:id])
+    #authorize! :destroy, @order_item
     if @order_item.destroy
       current_or_guest_user.current_order.set_total_price
       flash[:notice] = "Item deleted."
     else
       flash[:alert] = "Item wasn't deleted"
     end
-    redirect_to cart_path
+    redirect_to root_path
   end
 
   private

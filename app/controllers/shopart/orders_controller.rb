@@ -36,7 +36,7 @@ module Shopart
     private
 
     def find_order
-      @order = Order.find(params[:id])
+      @order = Shopart::Order.find(params[:id])
     end
 
     def find_cart

@@ -1,0 +1,74 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome";
+
+.unfinished {
+  color: black;
+}
+.current {
+  text-decoration: underline;
+  color: black;
+}
+.finished {
+  text-decoration: underline;
+}
+
+.checkout_header {
+  font-size: 18px;
+}
+
+.row {
+  padding-top: 10px;
+}
+
+.shipping_address_checkout .hidden {
+    display:none;
+  }
+
+.qty{
+  width: 15%;
+}
+.fa-times {
+  color: red;
+}
+
+h1, h2, h3, h4, h5 {
+  padding: 20px;
+}
+
+.alert-notice {
+  background-color: #DFF0D8;
+  border-color: #D6E9C6;
+  color: #3C763D;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  }
+.alert-alert {
+  background-color: #FFCECE;
+  border-color: #8a1f11;
+  color:  #FF6565;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  }
+
+

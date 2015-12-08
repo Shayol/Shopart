@@ -22,6 +22,9 @@ Gem::Specification.new do |s|
   s.add_dependency "wicked"
   s.add_dependency "country_select"
   s.add_dependency "virtus"
+  s.add_dependency 'bootstrap-sass', '~> 3.3.5'
+  s.add_dependency "sass-rails", '~> 5.0'
+  s.add_dependency "font-awesome-rails"
 
   s.add_development_dependency "pg"
   s.add_development_dependency "rspec-rails"
