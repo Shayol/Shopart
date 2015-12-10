@@ -14,9 +14,9 @@ module Shopart
     end
 
     def index
-      @waiting_for_processing = current_or_guest_user.orders.in_queue
-      @in_delivery = current_or_guest_user.orders.in_delivery
-      @delivered = current_or_guest_user.orders.delivered
+      @waiting_for_processing = current_customer.orders.in_queue
+      @in_delivery = current_customer.orders.in_delivery
+      @delivered = current_customer.orders.delivered
     end
 
     def destroy
@@ -40,7 +40,7 @@ module Shopart
     end
 
     def find_cart
-       @cart = current_or_guest_user.current_order
+       @cart = current_order
     end
   end
 end

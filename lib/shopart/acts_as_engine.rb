@@ -1,8 +1,6 @@
 module Shopart
   module ActsAsEngine
-    extend ActiveSupport::Concern
-
-    module ClassMethods
+    module ExtendModels
       def acts_as_customer
         class_eval do
           has_many :orders, class_name: 'Shopart::Order',
@@ -11,10 +9,6 @@ module Shopart
                                 dependent: :destroy, as: :customer
           # belongs_to :billing_address, :class_name => 'Shopart::Address', :foreign_key => 'billing_address_id'
           # belongs_to :shipping_address, :class_name => 'Shopart::Address', :foreign_key => 'shipping_address_id'
-          def current_order
-            order = orders.in_progress.first
-            order.nil? ? orders.create : order
-          end
          end                       
       end
 
@@ -25,7 +19,26 @@ module Shopart
                                  dependent: :destroy, as: :product)
       end
     end
+    module Helpers
+      def acts_as_current_customer(user)
+        class_eval do
+          alias_method :current_customer, user
+          def current_order           
+            order = current_customer.orders.in_progress.first
+            order.nil? ? current_customer.orders.create : order
+          end
+          helper Shopart::Engine.helpers
+          helper_method :current_order
+        end
+      end
+    end
   end
 end
 
-ActiveRecord::Base.send(:include, Shopart::ActsAsEngine)
+ActiveRecord::Base.send(:extend, Shopart::ActsAsEngine::ExtendModels)
+ActionController::Base.send(:extend, Shopart::ActsAsEngine::Helpers)
+# ActiveSupport.on_load(:action_controller) do
+#   if respond_to?(:helper)
+#     helper Shopart::Engine.helpers
+#   end
+# end

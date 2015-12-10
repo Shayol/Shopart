@@ -77,7 +77,7 @@ module Shopart
     end
 
     def current_order?
-      self == customer.current_order
+      self == customer.orders.in_progress.first
     end
 
   end

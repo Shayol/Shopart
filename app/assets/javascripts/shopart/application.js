@@ -20,7 +20,7 @@ ready = function() {
   }
 
   $('#checkout_address_form_use_billing_as_shipping').change(function() {
-  $(".shipping_address_checkout").toggleClass("hidden");
+    $(".shipping_address_checkout").toggleClass("hidden");
   });
 
 };
