@@ -9,8 +9,8 @@ module Shopart
     has_many   :products, :through => :order_items
     belongs_to :customer, polymorphic: true
     belongs_to :delivery, class_name: 'Shopart::Delivery'
-    belongs_to :billing_address, :class_name => 'Address', :foreign_key => 'billing_address_id'
-    belongs_to :shipping_address, :class_name => 'Address', :foreign_key => 'shipping_address_id'
+    belongs_to :billing_address, :class_name => 'Shopart::Address', :foreign_key => 'billing_address_id'
+    belongs_to :shipping_address, :class_name => 'Shopart::Address', :foreign_key => 'shipping_address_id'
 
     validates  :state, inclusion: { in: ORDER_STATE }, presence: true
 
@@ -46,7 +46,7 @@ module Shopart
     end
 
     def add_item(product, quantity=1)
-      item = OrderItem.find_or_create_by(product: product, price: product.price, order: self)
+      item = Shopart::OrderItem.find_or_create_by(product: product, price: product.price, order: self)
       item.increment!(:quantity, quantity)    
       set_total_price
       item.valid?
